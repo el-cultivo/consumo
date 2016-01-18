@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+
 class GastosController extends Controller
 {
     /**
@@ -26,7 +28,12 @@ class GastosController extends Controller
      */
     public function create()
     {
-        return view('gastos.create');
+        $data = array(
+            'usuarios' => User::all()->lists('name', 'id')->toArray(),
+        );
+        //dd($data);
+        
+        return view('gastos.create', $data);
     }
 
     /**

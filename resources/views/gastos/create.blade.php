@@ -22,10 +22,9 @@
             <p>Se te debe: <strong>$$$</strong></p>
         </div>
         <div class="col-md-7 principal">
-            <form>
-                <input type="text" placeholder="nombre">
-            </form>
-            {!! Form::open(array('url' => 'foo/bar')) !!} {!! Form::close() !!}
+            {!! Form::open(['method' => 'POST', 'action' => 'GastosController@store']) !!}
+                @include('gastos._form')
+            {!! Form::close() !!}
         </div>
     </div>
 @stop
