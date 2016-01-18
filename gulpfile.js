@@ -18,13 +18,13 @@ gulp.task("copyfiles", function() {
     .pipe(gulp.dest("resources/assets/js/"));
 
   gulp.src("vendor/bower_dl/bootstrap-sass/assets/fonts/**")
-    .pipe(gulp.dest("public/assets/fonts"));
+    .pipe(gulp.dest("public/fonts"));
 
   gulp.src("vendor/bower_dl/font-awesome/scss/**")
       .pipe(gulp.dest("resources/assets/sass/font-awesome"));
 
   gulp.src("vendor/bower_dl/font-awesome/fonts/**")
-      .pipe(gulp.dest("public/assets/fonts/font-awesome"));
+      .pipe(gulp.dest("public/fonts"));
 
 });
 

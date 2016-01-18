@@ -9,16 +9,16 @@
     <body class="">
         <div class="container">
             <div class="row titulo">
-                <h1>Nuevo Gasto</h1>
+                <h1><span class="fa fa-money"></span> Nuevo Gasto</h1>
             </div>
 
             <div class="row contenido">
                 <div class="col-md-2 navegacion">
                     <ul>
-                        <li><a href="#">Presupuesto</a></li>
+                        <li><a href="#">Presupuestos</a></li>
                         <li><a href="#">Gastos</a></li>
-                        <li><a href="#">Deudas</a></li>
-                        <li><a href="#">Config</a></li>
+                        {{-- <li><a href="#">Deudas</a></li>
+                        <li><a href="#">Config</a></li> --}}
                     </ul>
                 </div>
                 <div class="col-md-3 informacion">
@@ -26,6 +26,7 @@
                     <p>Gastado: <strong>$$$</strong></p>
                     <p>Disponible: <strong>$$$</strong></p>
                     <p>% Disponible: <strong>%%%</strong></p>
+                    <p>Se te debe: <strong>$$$</strong></p>
                 </div>
                 <div class="col-md-7 principal">
                     <form>
@@ -33,7 +34,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </body>
 </html>
