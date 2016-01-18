@@ -25,6 +25,7 @@
             <form>
                 <input type="text" placeholder="nombre">
             </form>
+            {!! Form::open(array('url' => 'foo/bar')) !!} {!! Form::close() !!}
         </div>
     </div>
 @stop
