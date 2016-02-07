@@ -1,47 +1,29 @@
 @extends('app')
 
-@section('contenido')
-    <div class="row feedback">
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @if (Session::has('flash_message'))
-            <div class="alert alert-success">
-                {{ Session::get('flash_message') }}
-            </div>
-        @endif
-    </div>
-    <div class="row titulo">
-        <h1><span class="fa fa-money"></span> Nuevo Gasto</h1>
-    </div>
+@section('title')
+    Nuevo Gasto
+@stop
 
-    <div class="row contenido">
-        <div class="col-md-2 navegacion">
-            <ul>
-                <li><a href="#">Presupuestos</a></li>
-                <li><a href="#">Gastos</a></li>
-                <li><a href="#">Deudas</a></li>
-                <li><a href="{{URL::to('auth/logout')}}"><small>Salir</small></a></li>
-                {{-- <li><a href="#">Config</a></li> --}}
-            </ul>
-        </div>
-        <div class="col-md-3 informacion">
-            <p>Presupuesto mensual: <strong>$$$</strong></p>
-            <p>Gastado: <strong>$$$</strong></p>
-            <p>Disponible: <strong>$$$</strong></p>
-            <p>% Disponible: <strong>%%%</strong></p>
-            <p>Se te debe: <strong>$$$</strong></p>
-        </div>
-        <div class="col-md-7 principal">
-            {!! Form::open(['method' => 'POST', 'action' => 'GastosController@store']) !!}
-                @include('gastos._form')
-            {!! Form::close() !!}
-        </div>
+@section('h1')
+    Nuevo Gasto
+@stop
+
+
+@section('informacion')
+    <div class="col-md-3 informacion">
+        <p>Presupuesto mensual: <strong>$$$</strong></p>
+        <p>Gastado: <strong>$$$</strong></p>
+        <p>Disponible: <strong>$$$</strong></p>
+        <p>% Disponible: <strong>%%%</strong></p>
+        <p>Se te debe: <strong>$$$</strong></p>
+    </div>
+@stop
+
+
+@section('principal')
+    <div class="col-md-7 principal">
+        {!! Form::open(['method' => 'POST', 'action' => 'GastosController@store']) !!}
+            @include('gastos._form')
+        {!! Form::close() !!}
     </div>
 @stop
