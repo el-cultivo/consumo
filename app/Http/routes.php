@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return redirect('gastos/create');
 });
-Route::group([ 'middleware' => ['auth'] ], function(){
+Route::group([ 'middleware' => ['auth', 'NumeroDeUsuarios'] ], function(){
 	Route::resource('gastos', 'GastosController');
 });
 

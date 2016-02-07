@@ -9,7 +9,8 @@
 @stop
 
 
-@section('informacion')
+@section('sidebar')
+    @include('_menu')
     <div class="col-md-3 informacion">
         <p>Presupuesto mensual: <strong>$$$</strong></p>
         <p>Gastado: <strong>$$$</strong></p>

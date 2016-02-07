@@ -1,17 +1,21 @@
 @extends('app')
 
-@section('contenido')
-	<form method="POST" action="/password/reset">
-    	{!! csrf_field() !!}
-	    <input type="hidden" name="token" value="{{ $token }}">
+@section('title')
+    Nueva contraseña
+@stop
 
-	    @if (count($errors) > 0)
-	        <ul>
-	            @foreach ($errors->all() as $error)
-	                <li>{{ $error }}</li>
-	            @endforeach
-	        </ul>
-	    @endif
+@section('h1')
+    Nueva contraseña
+@stop
+
+
+@section('sidebar')
+@stop
+
+
+@section('principal')
+	<form method="POST" action="/auth/register">
+	    {!! csrf_field() !!}
 
 	    <div>
 	        Email

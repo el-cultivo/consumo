@@ -16,8 +16,7 @@
 		    </div>
 
 		    <div class="row contenido">
-				@include('_menu')
-				@yield('informacion')
+				@yield('sidebar')
 		        
 		        @yield('principal')
 

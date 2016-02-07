@@ -1,6 +1,19 @@
 @extends('app')
 
-@section('contenido')
+@section('title')
+    Iniciar sesión
+@stop
+
+@section('h1')
+    Iniciar sesión
+@stop
+
+
+@section('sidebar')
+@stop
+
+
+@section('principal')
 	<form method="POST" action="/auth/login">
 	    {!! csrf_field() !!}
 
