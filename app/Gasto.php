@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\User;
 
 class Gasto extends Model
 {
@@ -28,6 +29,17 @@ class Gasto extends Model
         'Prestamo' => 'Prestamo'
     ];
 
+    /**
+     * Trae el usuario de este Gasto.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Si la fecha no trae hora y minutos los crea a partir de la hora actual.
+     */
     public function setCreatedAtAttribute($date)
     {
         $this->attributes['created_at'] = Carbon::createFromFormat('Y-m-d', $date);

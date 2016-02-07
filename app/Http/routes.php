@@ -15,7 +15,10 @@ Route::get('/', function () {
     return redirect('gastos/create');
 });
 Route::group([ 'middleware' => ['auth', 'NumeroDeUsuarios'] ], function(){
-	Route::resource('gastos', 'GastosController');
+	Route::resource('gastos', 'GastosController', ['except' => ['index']]);
+	Route::get('gastos/{ano?}/{mes?}','GastosController@index')
+	->where('ano', '\d{4}')
+	->where('mes', '\d{2}');
 });
 
 Route::controllers([

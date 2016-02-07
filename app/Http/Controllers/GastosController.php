@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\Gasto;
+use Carbon\Carbon;
 
 class GastosController extends Controller
 {
@@ -21,9 +22,19 @@ class GastosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($ano = NULL, $mes = NULL)
     {
-        //
+        if(!isset($ano) || !isset($mes)){
+            $hoy = Carbon::now();
+            return redirect('gastos/'.$hoy->year.'/'.$hoy->format('m'));
+        }
+        $data = array(
+            'user' => Auth::user(),
+            'fecha' => Carbon::createFromDate($ano, $mes),
+            'gastos' => Auth::user()->gastos,
+        );
+        $data['total'] = number_format( $data['gastos']->sum('cantidad'), 2 );
+        return view('gastos.index', $data);
     }
 
     /**
@@ -146,8 +157,6 @@ class GastosController extends Controller
 
         foreach ($users as $user) {
             $gasto = new Gasto($input);
-            // $prestamo_user_id = $input['prestamo_user_id'];
-            // $tipo_page = $input['tipo_page'];
 
             if($input['user_id'] == $user->id){
                 $gasto->prestamo_user_id = NULL;

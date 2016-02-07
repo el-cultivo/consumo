@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Gasto;
+
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -36,6 +38,16 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+
+    /**
+     * Get the Gastos for the User.
+     */
+    public function gastos()
+    {
+        return $this->hasMany(Gasto::class);
+    }
 
 
     /**
