@@ -1,6 +1,22 @@
 @extends('app')
 
 @section('contenido')
+    <div class="row feedback">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (Session::has('flash_message'))
+            <div class="alert alert-success">
+                {{ Session::get('flash_message') }}
+            </div>
+        @endif
+    </div>
     <div class="row titulo">
         <h1><span class="fa fa-money"></span> Nuevo Gasto</h1>
     </div>

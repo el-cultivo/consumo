@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\StoreGastoRequest;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Gasto;
 
 class GastosController extends Controller
 {
@@ -42,9 +44,12 @@ class GastosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGastoRequest $request)
     {
-        //
+        if( Gasto::create($request->all()) ){
+            \Session::flash('flash_message', "¡Se guardó chido! :)");
+            return redirect('gastos/create');
+        }
     }
 
     /**

@@ -9,7 +9,7 @@
 </div>
 <div class="row">
 	<div class="form-group col-md-6">
-		{!! Form::label('user_id', 'Cuándo')!!}
+		{!! Form::label('created_at', 'Cuándo')!!}
 		{!! Form::date ('created_at', Carbon\Carbon::now() , ['class' => 'form-control', 'required']) !!}
 	</div>
 	<div class="form-group col-md-6">

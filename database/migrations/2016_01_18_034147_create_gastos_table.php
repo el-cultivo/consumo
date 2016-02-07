@@ -16,7 +16,7 @@ class CreateGastosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->decimal('cantidad',10, 2);
-            $table->integer('tipo_pago');
+            $table->string('tipo_pago');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
