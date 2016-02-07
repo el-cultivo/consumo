@@ -36,4 +36,16 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    /**
+     * Return all users into array id => name
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAllNameIdArray($query)
+    {
+        return User::all()->lists('name', 'id')->toArray();
+    }
+
 }

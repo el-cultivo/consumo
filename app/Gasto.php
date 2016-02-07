@@ -19,10 +19,14 @@ class Gasto extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'cantidad', 'tipo_pago', 'user_id', 'created_at'];
+    protected $fillable = ['nombre', 'cantidad', 'tipo_pago', 'user_id', 'created_at', 'prestamo_user_id'];
     protected $dates = ['created_at', 'updated_at'];
 
-
+    public static $tipos_prestamos = [
+        'Ninguno' => 'Ninguno',
+        'Gasto Compartido' => 'Gasto Compartido',
+        'Prestamo' => 'Prestamo'
+    ];
 
     public function setCreatedAtAttribute($date)
     {

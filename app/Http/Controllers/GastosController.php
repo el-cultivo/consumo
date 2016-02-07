@@ -8,12 +8,14 @@ use App\Http\Requests;
 use App\Http\Requests\StoreGastoRequest;
 use App\Http\Controllers\Controller;
 
+use Auth;
 use App\User;
 use App\Gasto;
 
 class GastosController extends Controller
 {
     private $usuarios;
+
     /**
      * Display a listing of the resource.
      *
@@ -31,10 +33,16 @@ class GastosController extends Controller
      */
     public function create()
     {
+        $this->usuarios = User::allNameIdArray();
         $data = array(
-            'usuarios' => User::all()->lists('name', 'id')->toArray(),
+            'usuarios' => $this->usuarios,
+            'usuarios_disponibles_prestamo' => $this->getUsuariosDisponiblesPrestamo(),
+            'usuarios_prestamo_disabled' => '',
         );
 
+        if(count($data['usuarios_disponibles_prestamo']) <= 1){
+            $data['usuarios_prestamo_disabled'] = 'readonly';
+        }
         
         return view('gastos.create', $data);
     }
@@ -47,9 +55,33 @@ class GastosController extends Controller
      */
     public function store(StoreGastoRequest $request)
     {
-        if( Gasto::create($request->all()) ){
+        $input = $request->all();
+        $gasto = new Gasto($input);
+        $exito = false;
+
+        if($input['prestamo'] == 'Ninguno'){
+            $gasto->prestamo_user_id = NULL;
+            if($gasto->save()){
+                $exito = true;
+            }
+
+        }elseif($input['prestamo'] == 'Prestamo'){
+            $gasto->prestamo_user_id = $input['user_id'];
+            $gasto->user_id = $input['prestamo_user_id'];
+
+            if($gasto->save()){
+                $exito = true;
+            }
+        }elseif($input['prestamo'] == 'Gasto Compartido'){
+            if($this->createGastoCompartido($input)){
+                $exito = true;
+            }
+
+        }
+
+        if( $exito){
             \Session::flash('flash_message', "¡Se guardó chido! :)");
-            return redirect('gastos/create');
+            return redirect('gastos');
         }
     }
 
@@ -96,5 +128,41 @@ class GastosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getUsuariosDisponiblesPrestamo(){
+        $usuarios = isset($this->usuarios) ? $this->usuarios : User::allNameIdArray();
+        unset($usuarios[Auth::user()->id]);
+        return $usuarios;
+    }
+
+    private function createGastoCompartido($input){
+        //dd($input);
+        $users = User::all();
+        $input['cantidad'] = $input['cantidad']/$users->count();
+        $exito = 0;
+        
+        //dd($gasto);
+
+        foreach ($users as $user) {
+            $gasto = new Gasto($input);
+            // $prestamo_user_id = $input['prestamo_user_id'];
+            // $tipo_page = $input['tipo_page'];
+
+            if($input['user_id'] == $user->id){
+                $gasto->prestamo_user_id = NULL;
+            }else{
+                $gasto->tipo_pago = 'Efectivo';
+                $gasto->user_id = $user->id;
+            }
+            if($gasto->save()){
+                $exito++;
+            }
+        }
+        if($exito == $users->count() -1){
+            return true;
+        }
+        return false;
+
     }
 }

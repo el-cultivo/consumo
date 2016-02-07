@@ -14,44 +14,27 @@
 	</div>
 	<div class="form-group col-md-6">
 		{!! Form::label('user_id', 'Quién')!!}
-		{!! Form::select('user_id', $usuarios, '1', ['class' => 'form-control']) !!}
+		{!! Form::select('user_id', $usuarios, Auth::user()->id, ['class' => 'form-control']) !!}
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="form-group col-md-6">
 		<label>Tipo de pago</label>
-		<div class="radio">
-			<label>
-				{!! Form::radio('tipo_pago', 'Efectivo', true); !!} Efectivo
-			</label>
-		</div>
-		<div class="radio">
-			<label>
-				{!! Form::radio('tipo_pago', 'Crédito'); !!} Crédito
-			</label>
-		</div>
+		{!! Form::select('tipo_pago', ['Efectivo'=>'Efectivo', 'Crédito'=>'Crédito'], 'Efectivo', ['class' => 'form-control']) !!}
 	</div>
-	<div class="col-md-6">
+	<div class="form-group col-md-6">
 		<label>Prestamo</label>
-		<div class="radio">
-			<label>
-				{!! Form::radio('prestamo', 'ninguno', true); !!} Ninguno
-			</label>
-		</div>
-		<div class="radio">
-			<label>
-				{!! Form::radio('prestamo', 'compartido'); !!} Gasto Compartido
-			</label>
-		</div>
-		<div class="radio">
-			<label>
-				{!! Form::radio('prestamo', 'prestamo'); !!} Préstamo
-			</label>
-		</div>
+		{!! Form::select('prestamo', App\Gasto::$tipos_prestamos, 'Ninguno', ['class' => 'form-control']) !!}
+	</div>
+</div>
+<div class="row">
+	<div class="form-group col-md-6">
+		<label>Prestamos a usuario</label>
+		{!! Form::select('prestamo_user_id', $usuarios_disponibles_prestamo, 'Efectivo', ['class' => 'form-control', $usuarios_prestamo_disabled]) !!}
 	</div>
 </div>
 
 
 <div class="form-group">
-{!! Form::submit('Guardar', ['class' => 'btn btn-primary'] ) !!}
+	<p>{!! Form::submit('Guardar', ['class' => 'btn btn-primary'] ) !!}</p>
 </div>

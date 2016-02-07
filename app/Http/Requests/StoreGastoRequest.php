@@ -28,7 +28,7 @@ class StoreGastoRequest extends Request
             'cantidad' => 'required',
             'created_at' => 'required',
             'tipo_pago' => 'required',
-            'prestamo' => 'required'
+            'prestamo' => 'required',
         ];
     }
 }

@@ -18,9 +18,15 @@ class CreateGastosTable extends Migration
             $table->decimal('cantidad',10, 2);
             $table->string('tipo_pago');
             $table->integer('user_id')->unsigned();
+            $table->integer('prestamo_user_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table  ->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+
+            $table  ->foreign('prestamo_user_id')
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade');
