@@ -13,6 +13,7 @@ use App\Gasto;
 
 class GastosController extends Controller
 {
+    private $usuarios;
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +34,7 @@ class GastosController extends Controller
         $data = array(
             'usuarios' => User::all()->lists('name', 'id')->toArray(),
         );
-        //dd($data);
+
         
         return view('gastos.create', $data);
     }

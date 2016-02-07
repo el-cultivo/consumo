@@ -22,7 +22,6 @@
 		        @yield('principal')
 
 		    </div>
-        	{{-- @yield('contenido') --}}
         </div>
     </body>
 </html>
